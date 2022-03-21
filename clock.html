@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sử dụng đối tượng window</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .app {
+            min-width: 600px;
+            height: 60px;
+            display: flex;
+            border: 2px solid gray;
+        }
+    
+        .clock {
+            width: 30%;
+            background-color: red;
+            height: 100%;   
+            line-height: 60px;
+            text-align: center;
+        }
+    
+        .text {
+            width: 70%;
+            height: 100%;
+            line-height: 60px;
+            text-align: center;
+            background-color: rgb(204, 199, 199);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="clock"></div>
+        <div class="text" style="color: blue;"></div>
+    </div>
+
+
+    <script>
+        const text = document.querySelector('.text')
+
+        setInterval(() => {
+            const date = new Date()
+            let hours = date.getHours()
+            let minutes = date.getMinutes()
+            let seconds = date.getSeconds()
+            
+            if(seconds<10){
+                seconds = "0" + seconds;
+            }
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+            if(hours < 10){
+                hours = "0" + hours;
+            }
+
+            if (hours >= 0 && hours < 12) {
+                text.innerText = 'Chào buổi sáng'
+                text.style.fontSize = '25px'
+            }
+            if (hours > 12 && hours < 17) {
+                text.innerText = 'Chào buổi chiều'
+                text.style.fontSize = '30px'
+            } else {
+                text.innerText = 'Chào buổi tối'
+                text.style.fontSize = '35px'
+            }
+
+            document.querySelector('.clock').innerText = `${hours} : ${minutes} : ${seconds}`
+        }, 1000)
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sử dụng đối tượng Array</title>
+</head>
+<body>
+    <div>
+        <table width="60%" height="200px">
+            <caption style="color:green; font-size: 30px; font-weight: 800;">Thao tác trên mảng</caption>
+
+            <tr>
+                <td><button class="create">Tạo Mảng</button></td>
+                <td class="row-start"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="display: inline;">Giá trị mảng sau khi xử lý</td>
+                <br>
+                <td class="handle"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="radio" name="sort" id="increase" value="increase">
+                    <label for="increase">Sắp xếp tăng</label>
+                    <input type="radio" name="sort" id="decrease" value="decrease">
+                    <label for="decrease">Sắp xếp giảm</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Thêm vào vị trí <input name="add">
+                    Giá trị <input name="value">
+                    <button class="btn-add">Thêm</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const start = () => {
+            const create = document.querySelector('.create')
+            const rowStart = document.querySelector('.row-start')
+            const inputs = document.querySelectorAll('input[name=sort]')
+            const btnAdd = document.querySelector('.btn-add')
+            const index = document.querySelector('input[name=add]')
+            const value = document.querySelector('input[name=value]')
+
+            let arr = []
+
+            create.addEventListener('click', () => {
+                arr = []
+                var random = 10 + Math.floor(Math.random() * 11)
+                for (let i = 0; i < random; i++) {
+                    arr.push(10 + Math.floor(Math.random() * 91))
+                }
+                rowStart.innerText = arr.join(', ')
+            })
+
+            const Sort = () => {
+                inputs.forEach(input => {
+                    input.onclick = () => {
+                        if (input.value === 'increase') {
+                            arr.sort((a, b) => a - b)
+                            document.querySelector('.handle').innerText = arr.join(', ')
+                        } else {
+                            arr.sort((a, b) => b - a)
+                            document.querySelector('.handle').innerText = arr.join(', ')
+                        }
+                    }
+                })
+            }
+
+            Sort()
+
+            btnAdd.addEventListener('click', () => {
+                let a = index.value
+                let b = +value.value
+                arr.splice(a - 1, 0, b)
+                rowStart.innerText = arr.join(', ')
+            })
+        }
+        start()
+    </script>
+ </body>
+</html>
